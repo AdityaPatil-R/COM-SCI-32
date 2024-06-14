@@ -1,0 +1,54 @@
+Name: Aditya Patil
+UID: 406216539
+
+Name of recursive goblin movement function:
+    bool Monster::pathExists(int monY, int monX, int playY, int playX, int smell)
+
+Name of file that the recursive goblin movement function is implemented in:
+    Monster.cpp
+
+High-level description of the goblin movement function:
+    return true if the monster reached the player
+    return false if the monster can't smell any further
+    create list of directions to prioritize moving towards the player
+        examinine relationships between the monster's and player's positions to determine order of checking moves
+    loop through the list of directions
+        if the direction is valid, call the goblin movement function with the new location and 1 less goblin smell distance
+            if that returns true, add the location to a vector and return true
+    return false
+
+    This function returns a boolean representing whether or not the player is reachable within goblinSmellDistance steps.
+    If it is true, then the function sets a global vector to the path that the goblin would take to reach the player.
+    This vector is then accessed in the move function to move the goblin.
+
+High-level description of the generation of levels with rooms connected by corridors:
+    while the rooms aren't connected,
+        fill it with walls
+        randomly generate the total number of rooms, and loop through a list of rooms that many times
+            call a helper function to set the list's current element to a new room
+                create a room with random width, height, and location
+                call a helper function to generate a room that doesn't overlap with any others
+        empty the part of the grid where the new room was made
+        call a helper function to connect the room with other ones on the grid
+            save the location of the center of the room
+            iterate up and down from the center of the top and bottom edges
+                if you hit another room, call a helper function to make a corridor to connect them
+            iterate left and right from the center of the left and right edges
+                if you hit another room, call a helper function to make a corridor to connect them
+        call a helper function to check if the level is connected  
+            find a random point in a room in the level
+            create a separate array to be a copy of the grid with rooms and corridors
+            call a helper function to recursively perform floodfill to check if it's connected
+                if the point passed into it is in the grid's bounds and not already checked
+                    mark it as checked and call the recursive function on the four locations adjacent to it
+        break out of the loop if the rooms are connected, else regenerate a level until it's valid
+
+    This function makes use of helper functions to fill rooms, see if they're connected, see if they overlap, generate rooms, make corridors, and connect rooms.
+
+List of unfinished functionality, bugs in implementation, and serious inefficiencies:
+    Unfinished functionality
+        None
+    Bugs in implementation
+        Random member access errors when running on g32, but doesn't negatively impact gameplay
+    Serious inefficiencies
+        Recursive goblin algorithm occasionally runs slowly

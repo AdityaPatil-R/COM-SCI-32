@@ -1,0 +1,42 @@
+Name: Aditya Patil
+UID: 406216539
+
+Problem 1e:
+    Once k reaches a value of 2, the vector's location in memory gets moved because its storage size increased.
+    The iterator p doesn't move to reflect this change, leading to undefined behavior when it is later dereferenced.
+    This means the value it points to isn't equal to MAGIC, which sets allValid to false, and thus fails test 3.
+
+Problem 3:
+    The insert function calls the findFirstAtMost function, which is where the compilation errors stem from.
+    The findFirstAtMost function attempts to call the comparison and equal operators on objects of type Coord.
+    However, since these operators aren't defined for objects of type Coord, the program throws a compilation error.
+
+Problem 4b:
+    The second parameter is necessary in order to update the outputted path for each individual directory.
+    The function couldn't be implemented in the same way if there was only one parameter.
+    This is because the path wouldn't be able to be updated and outputted uniquely for each directory.
+
+Problem 5a:
+    The time complexity of this algorithm is O(N^3).
+    This is because it loops 3 times over N elements each. 
+    The if statements in the innermost loop run in constant time and don't affect time complexity.
+
+Problem 5b:
+    The time complexity of this algorithm is O(N^3).
+    This is because it still loops 3 times over at most N elements each, and the if statements in the innermost loop run in constant time.
+    The overall time complexity is different from in Problem 5a, but the highest order term is still N^3, so the overall time complexity is the same.
+
+Problem 6a:
+    The worst case time complexity is O(N^2).
+    This is because it loops over N elements, and the get and insert functions can each take up to N operations.
+    Because only the highest order term matters, that reduces O(N^2 + N^2) to O(N^2) for the worst case time complexity.
+
+Problem 6b:
+    The time complexity is O(Nlog(N)).
+    This is because the first two loops are each over N elements, the sort is O(Nlog(N)), and the next two loops are each over N elements.
+    Because only the highest order term matters, that reduces the time complexity to O(Nlog(N)).
+
+Problem 6c:
+    The time complexity is O(N).
+    This is because the while and for loops iterate over N elements, and everything else runs in constant time.
+    Because only the highest order term matters, that reduces O(N) + O(N) to O(N).

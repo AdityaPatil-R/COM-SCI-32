@@ -1,0 +1,174 @@
+Design of Doubly-Linked Linked List
+    
+    Null           Element  ->  Element  ->  ...  ->  Element   ->   Null
+    Pointer   <-   1 (Max)  <-     2     <-  ...  <-  n (Min)        Pointer
+
+                      ^                                  ^
+                      |                                  |
+
+                   Head                               Tail
+                   Pointer                            Pointer
+
+    The design is a non-circular doubly linked list with the following traits
+        The previous node of the first element in the list and the next node of the last element in the list are null pointers
+        There are 2 variables called the head and tail pointers, which pointn to the first and last elements, respectively
+        The list is ordered so that the head pointer points to the highest value, and the tail pointer points to the lowest value
+            This makes it easier to call the get function
+
+Pseudocode
+    Insert Function
+        If value is in the set, return false
+        Else, create a new node for value
+        If the set is empty,
+            The node's previous and next nodes will be null
+            Head and tail will point to the node
+        If value exceeds the head's value,
+            Add value's node before the head
+        If value is less than tail's value,
+            Add value's node after the tail
+        If value is between head's and tail's value,
+            Find the set's smallest value larger than value
+            Add value's node right after it
+        Increment the set's size and return true
+
+    Erase Function
+        If the value isn't in the set, return false
+        Else, iterate through the set until the value is found
+            If it's at the head, decrement the set's size and return true
+        Return false if value isn't found
+
+    Contains Function
+        If the set is empty, return false
+        Initialize a pointer to the head and repeatedly:   
+            If the pointer points to value, return true
+            Else, go to the next node
+        Return false if the value isn't found
+
+    Get Function
+        If the position is valid,
+            Iterate to the value in the set corresponding to the position
+            Set value to the node's value and return true
+        Return false for an invalid position
+
+    Swap Function
+        Swap the sizes
+        Swap the head pointers
+        Swap the tail pointers
+
+    Destructor
+        Iterate through the set:
+            While the current node isn't a null pointer, delete it and move to the next
+
+    Copy Constructor
+        Set the size to other's size
+        If other's size is zero, set head and tail to null pointers
+        Else, 
+            Create the head and set its previous node to a null pointer
+            Also initialize a base node to head
+            Iterate through the nodes in other:
+                Create a new node for each one
+                Update the base node's value and next node
+                Set the new node's previous node to the base node and update the base node to the next one
+            Set the base node to the tail and make it point to a null pointer, setting the set's tail to this node
+
+    Assignment Operator
+        If they aren't the same sets,
+            Copy the other set to a temporary variable, and swap it with the set it's being set equal to
+        Return the other set
+
+    Unite Function
+        Set a temporary set to an empty set
+        For each item in s1, insert it into result
+        For each item in s2, insert it into result unless it's already in result
+        Set result to the temporary set
+
+    InOnlyOne Function
+        Set a temporary set to an empty set
+        For each item in s1, insert it into result if it isn't in s2
+        For each item in s2, insert it into result if it isn't in s1
+        Set result to the temporary set
+
+Test Cases
+    Insert
+        Set s;
+        assert(s.insert("a"));
+        assert(s.size() == 1);
+        assert(s.insert("b"));
+        assert(s.insert("c"));
+        assert(s.size() == 3);
+        assert(!s.insert("a"));
+        assert(s.size() == 3);
+
+    Erase
+        Set s2;
+        s2.insert("a");
+        s2.insert("b");
+        s2.insert("c");
+        assert(s2.erase("b"));
+        assert(s2.size() == 2);
+        assert(!s2.erase("d"));
+        assert(s2.size() == 2);
+        assert(s2.erase("a"));
+        assert(s2.size() == 1);
+
+    Contains
+        Set s3;
+        s3.insert("a");
+        s3.insert("b");
+        assert(s3.contains("a"));
+        assert(s3.contains("b"));
+        assert(!s3.contains("d"));
+
+    Get
+        Set s4;
+        s4.insert("a");
+        s4.insert("b");
+        s4.insert("c");
+        std::string value;
+        assert(s4.get(0, value));
+        assert(value == "c");
+        assert(s4.get(1, value));
+        assert(value == "b");
+        assert(s4.get(2, value));
+        assert(value == "a");
+        assert(!s4.get(3, value));
+
+    Swap
+        Set s5;
+        Set s6;
+        s5.insert("a");
+        s5.insert("b");
+        s6.insert("c");
+        s5.swap(s6);
+        assert(s5.size() == 1);
+        assert(s5.contains("c"));
+        assert(s6.size() == 2);
+        assert(s6.contains("a"));
+        assert(s6.contains("b"));
+
+    Unite
+        Set s7;
+        Set s8;
+        s7.insert("a");
+        s7.insert("b");
+        s8.insert("b");
+        s8.insert("c");
+        Set result;
+        unite(s7, s8, result);
+        assert(result.size() == 3);
+        assert(result.contains("a"));
+        assert(result.contains("b"));
+        assert(result.contains("c"));
+
+    InOnlyOne
+        Set s9;
+        Set s10;
+        s9.insert("a");
+        s9.insert("b");
+        s10.insert("b");
+        s10.insert("c");
+        Set result2;
+        inOnlyOne(s9, s10, result2);
+        assert(result2.size() == 2);
+        assert(result2.contains("a"));
+        assert(result2.contains("c"));

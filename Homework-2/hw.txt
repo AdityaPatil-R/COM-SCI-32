@@ -1,0 +1,37 @@
+Name: Aditya Patil
+UID: 406216539
+
+Number 2
+    (4,3)
+    (3,3)
+    (5,3)
+    (5,2)
+    (5,1)
+    (6,1)
+    (7,1)
+    (8,1)
+    (8,2)
+    (6,3)
+    (4,4)
+    (4,5)
+
+Number 4
+    (4,3)
+    (4,4)
+    (5,3)
+    (3,3)
+    (4,5)
+    (6,3)
+    (5,2)
+    (4,6)
+    (5,5)
+    (5,1)
+    (4,7)
+    (6,5)
+
+    The stack-based algorithm is depth-first
+        This means that it goes through an entire possible path before backtracking and checking another one
+        This repeats until the destination point is reached, or until every single square has been checked
+    The queue-based algorithm is breadth-first
+        This means that it looks through multiple paths around it at equal distances at the same time
+        It keeps this up until the destination point is reached, or until every single square has been checked
