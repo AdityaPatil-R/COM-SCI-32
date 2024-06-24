@@ -1,7 +1,7 @@
 # COM SCI 32
 Instructor: David Smallberg\
 Quarter Taken: Spring 2024\
-Final Grade: TBD
+Final Grade: A
 
 ## Grades
 | Projects, Homeworks, and Exams | Score     |
